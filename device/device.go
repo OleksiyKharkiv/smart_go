@@ -44,7 +44,7 @@ func (d *Device) String() string {
 		safe = "unsafe"
 	}
 
-	return fmt.Sprintf("device %s is %s and %s , power: %dW", d.name, status, safe, d.power)
+	return fmt.Sprintf("device %s is %s and %s, power: %dW", d.name, status, safe, d.power)
 
 }
 func (s Status) String() string {
