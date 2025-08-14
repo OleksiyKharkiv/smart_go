@@ -12,25 +12,25 @@ func main() {
 	ac2 := device.NewDevice("AC2", 1500)
 	unsafeKettle := device.NewDevice("Unsafe Kettle", 2000)
 
-	fmt.Println("======= Program Start  ========")
+	fmt.Println("\033[32m======= Program Start ========\033[0m")
 
 	err := kettle.TurnOn()
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("device %s \n", kettle)
+	fmt.Printf("%s \n", kettle)
 
 	err = ac1.TurnOn()
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("device %s \n", ac1)
+	fmt.Printf("%s \n", ac1)
 
 	err = ac2.TurnOn()
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("device %s \n", ac2)
+	fmt.Printf("%s \n", ac2)
 
 	unsafeKettle.SetSafeStatus(false)
 	err = unsafeKettle.TurnOn()
