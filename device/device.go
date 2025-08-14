@@ -31,3 +31,6 @@ func (d *Device) TurnOn() error {
 	d.status = StatusOn
 	return nil
 }
+func (d *Device) SetSafeStatus(isSafe bool) {
+	d.isSafe = isSafe
+}
