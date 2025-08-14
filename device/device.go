@@ -26,7 +26,7 @@ func NewDevice(name string, power int) *Device {
 }
 func (d *Device) TurnOn() error {
 	if !d.isSafe {
-		return fmt.Errorf("device %s is n ot safe!", d.name)
+		return fmt.Errorf("device %s is not safe!", d.name)
 	}
 	d.status = StatusOn
 	return nil

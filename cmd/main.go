@@ -13,7 +13,6 @@ func main() {
 	unsafeKettle := device.NewDevice("Unsafe Kettle", 2000)
 
 	fmt.Println("======= Program Start  ========")
-	log.Println("Begin...")
 
 	err := kettle.TurnOn()
 	if err != nil {
