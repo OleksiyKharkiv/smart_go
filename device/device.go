@@ -51,6 +51,19 @@ func (d *Device) String() string {
 	return fmt.Sprintf("device %s is %s and %s, power: %dW", d.name, status, safe, d.power)
 
 }
+
+func (d *Device) GetPower() int {
+	return d.power
+
+}
+
+func (d *Device) StatusIsOn() bool {
+	if d.status == StatusOff {
+		return false
+	} else {
+		return true
+	}
+}
 func (s Status) String() string {
 	switch s {
 	case StatusOn:
