@@ -29,5 +29,6 @@ func (pg PowerGrid) TotalConsumption() int {
 			total += d.GetPower()
 		}
 	}
+	fmt.Printf("Total Consumption of %d grid \n", total)
 	return total
 }
