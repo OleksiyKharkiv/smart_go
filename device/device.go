@@ -16,14 +16,17 @@ type Device struct {
 	status Status
 }
 
+// Конструктор
 func NewDevice(name string, power int) *Device {
 	return &Device{
 		name:   name,
 		power:  power,
 		status: StatusOff,
-		isSafe: true,
+		isSafe: true, // По умолчанию устройство безопасно
 	}
 }
+
+// Методы управления состоянием
 func (d *Device) TurnOn() error {
 	if !d.isSafe {
 		return fmt.Errorf("device %s is not safe!", d.name)
@@ -31,45 +34,57 @@ func (d *Device) TurnOn() error {
 	d.status = StatusOn
 	return nil
 }
+
+func (d *Device) TurnOff() {
+	d.status = StatusOff
+}
+
 func (d *Device) SetSafeStatus(isSafe bool) {
 	d.isSafe = isSafe
 }
-func (d *Device) GetName() string {
+
+// Геттеры (инкапсуляция)
+func (d *Device) Name() string {
 	return d.name
 }
 
-func (d *Device) String() string {
-	status := "OFF"
-	if d.status == StatusOn {
-		status = "ON"
-	}
-	safe := "safe"
-	if !d.isSafe {
-		safe = "unsafe"
-	}
-
-	return fmt.Sprintf("device %s is %s and %s, power: %dW", d.name, status, safe, d.power)
-
-}
-
-func (d *Device) GetPower() int {
+func (d *Device) Power() int {
 	return d.power
-
 }
 
-func (d *Device) StatusIsOn() bool {
-	if d.status == StatusOff {
-		return false
-	} else {
-		return true
+func (d *Device) IsSafe() bool {
+	return d.isSafe
+}
+
+func (d *Device) IsOn() bool {
+	return d.status == StatusOn
+}
+
+// String реализует интерфейс Stringer
+func (d *Device) String() string {
+	return fmt.Sprintf("device %s is %s and %s, power: %dW",
+		d.name,
+		d.status.String(),
+		d.safetyString(),
+		d.power)
+}
+
+// Вспомогательный метод для безопасности
+func (d *Device) safetyString() string {
+	if d.isSafe {
+		return "safe"
 	}
+	return "unsafe"
 }
+
+// String для Status
 func (s Status) String() string {
 	switch s {
 	case StatusOn:
 		return "ON"
 	case StatusOff:
 		return "OFF"
+	default:
+		return "UNKNOWN"
 	}
-	return "UNKNOWN"
 }

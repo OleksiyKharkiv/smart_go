@@ -12,24 +12,23 @@ type PowerGrid struct {
 
 func NewPowerGrid(maxPower int) *PowerGrid {
 	return &PowerGrid{
-		devices:  make([]*device.Device, 0, maxPower),
+		devices:  []*device.Device{},
 		maxPower: maxPower,
 	}
 }
 
-func (pg PowerGrid) AddDevice(d *device.Device) {
+func (pg *PowerGrid) AddDevice(d *device.Device) {
 	pg.devices = append(pg.devices, d)
-	fmt.Printf("Device %s succefuly added \n", d.GetName())
+	fmt.Printf("Device %s succefuly added \n", d.Name())
 }
 
-func (pg PowerGrid) TotalConsumption() int {
+func (pg *PowerGrid) TotalConsumption() int {
 	total := 0
 	for _, d := range pg.devices {
-		if d.StatusIsOn() {
-			total += d.GetPower()
-			fmt.Printf("Device %s is on\n added to grid with power  %d \n", d.GetName(), d.GetPower())
+		if d.IsOn() {
+			total += d.Power()
+			fmt.Printf("Device %s is on\n added to grid with power  %d \n", d.Name(), d.Power())
 		}
 	}
-	fmt.Printf("Total Consumption of %d grid \n", total)
 	return total
 }
