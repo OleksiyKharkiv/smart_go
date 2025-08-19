@@ -34,6 +34,10 @@ func (d *Device) TurnOn() error {
 func (d *Device) SetSafeStatus(isSafe bool) {
 	d.isSafe = isSafe
 }
+func (d *Device) GetName() string {
+	return d.name
+}
+
 func (d *Device) String() string {
 	status := "OFF"
 	if d.status == StatusOn {

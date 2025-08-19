@@ -1,18 +1,28 @@
 package power_grid
 
-import "smart_go/device"
+import (
+	"fmt"
+	"smart_go/device"
+)
 
 type PowerGrid struct {
 	devices [] *device.Device
 	maxPower int
 }
 
-func NewPowerGrid(macPower int) *PowerGrid{
-	return nil
+func NewPowerGrid(maxPower int) *PowerGrid{
+	return &PowerGrid{
+		devices: make([] *device.Device, maxPower),
+		maxPower: maxPower,
+	}
 }
 
-func (pg *PowerGrid) AddDevice (device *device.Device){
-	pg.devices = append(pg.devices, device)
+func (pg *PowerGrid) AddDevice (d *device.Device){
+	pg.devices = append(pg.devices, d)
+	fmt.Printf("Device %s succefuly added \n", d.GetName())
 }
 
-func
+func (pg PowerGrid) TotalConsumption int{
+
+
+}
