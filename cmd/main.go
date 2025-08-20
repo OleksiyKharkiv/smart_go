@@ -45,4 +45,5 @@ func main() {
 	grid.AddDevice(unsafeKettle)
 
 	fmt.Printf("Total consumption: %d \n", grid.TotalConsumption())
+
 }
