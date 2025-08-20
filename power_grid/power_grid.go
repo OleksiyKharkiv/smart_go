@@ -2,6 +2,7 @@ package power_grid
 
 import (
 	"fmt"
+	"runtime"
 	"smart_go/device"
 )
 
@@ -31,4 +32,18 @@ func (pg *PowerGrid) TotalConsumption() int {
 		}
 	}
 	return total
+}
+func (pg *PowerGrid) AutoDisable() {
+	var maxDevice *device.Device
+	for _, d := range pg.devices {
+		if maxDevice == nil || d.Power() > maxDevice.Power() {
+			if d.IsOn() {
+				maxDevice = d
+			}
+		}
+	}
+	if maxDevice == nil {
+		runtime.Breakpoint()
+	}
+	maxDevice.TurnOff()
 }
