@@ -27,7 +27,6 @@ func (pg *PowerGrid) TotalConsumption() int {
 	for _, d := range pg.devices {
 		if d.IsOn() {
 			total += d.Power()
-			fmt.Printf("Device %s is on\n added to grid with power  %d \n", d.Name(), d.Power())
 		}
 	}
 	return total

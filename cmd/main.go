@@ -47,6 +47,6 @@ func main() {
 	fmt.Printf("Total consumption: %d \n", grid.TotalConsumption())
 	for grid.TotalConsumption() > grid.MaxPower() {
 		disabledDevice, _ := grid.AutoDisable()
-		fmt.Printf("Power grid is overloaded!\n Device %s off", disabledDevice.Name())
+		fmt.Printf("===============\nPower grid is overloaded!\n Device %s off\n===============", disabledDevice.Name())
 	}
 }
