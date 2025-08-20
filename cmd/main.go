@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	grid := power_grid.NewPowerGrid(5000)
+	grid := power_grid.NewPowerGrid(3500)
 	kettle := device.NewDevice("Kettle", 1500)
 	ac1 := device.NewDevice("AC1", 1000)
 	ac2 := device.NewDevice("AC2", 1500)
@@ -45,5 +45,5 @@ func main() {
 	grid.AddDevice(unsafeKettle)
 
 	fmt.Printf("Total consumption: %d \n", grid.TotalConsumption())
-
+	grid.AutoDisable()
 }

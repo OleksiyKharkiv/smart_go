@@ -46,4 +46,7 @@ func (pg *PowerGrid) AutoDisable() {
 		runtime.Breakpoint()
 	}
 	maxDevice.TurnOff()
+	fmt.Printf("=================================\n "+
+		"Power grid is overloaded! \n Device %s is off\n================================= \n", maxDevice.Name())
+	fmt.Printf("Actual total consumer of grid is : %d \n", pg.TotalConsumption())
 }
