@@ -45,8 +45,15 @@ func main() {
 	grid.AddDevice(unsafeKettle)
 
 	fmt.Printf("Total consumption: %d \nMaximal power is: %d\n", grid.TotalConsumption(), grid.MaxPower())
+
 	for grid.TotalConsumption() > grid.MaxPower() {
-		disabledDevice, _ := grid.AutoDisable()
+		disabledDevice, err := grid.AutoDisable()
+		if err != nil {
+			log.Printf("Error: %v\n", err)
+		}
+		if disabledDevice == nil {
+			break
+		}
 		fmt.Printf("===============\nPower grid is overloaded!\n Device %s off\n===============\n", disabledDevice.Name())
 	}
 }

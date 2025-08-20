@@ -20,7 +20,7 @@ func NewPowerGrid(maxPower int) *PowerGrid {
 func (pg *PowerGrid) AddDevice(d *device.Device) {
 	pg.devices = append(pg.devices, d)
 	if d.IsOn() && d.IsSafe() {
-		fmt.Printf("Device %s succefuly added \n", d.Name())
+		fmt.Printf("Device %s successfully added \n", d.Name())
 	}
 }
 
@@ -49,13 +49,13 @@ func (pg *PowerGrid) AutoDisable() (*device.Device, error) {
 }
 
 func (pg *PowerGrid) findMaxPowerDevice() *device.Device {
-	var MaxDevice *device.Device
+	var maxDevice *device.Device
 	for _, d := range pg.devices {
-		if d.IsOn() && (MaxDevice == nil || d.Power() > MaxDevice.Power()) {
-			MaxDevice = d
+		if d.IsOn() && (maxDevice == nil || d.Power() > maxDevice.Power()) {
+			maxDevice = d
 		}
 	}
-	return MaxDevice
+	return maxDevice
 
 }
 func (pg *PowerGrid) MaxPower() int {
