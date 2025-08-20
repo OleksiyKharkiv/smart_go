@@ -32,27 +32,31 @@ func (pg *PowerGrid) TotalConsumption() int {
 	}
 	return total
 }
-func (pg *PowerGrid) AutoDisable() error {
+func (pg *PowerGrid) AutoDisable() (*device.Device, error) {
 	if len(pg.devices) == 0 {
-		return fmt.Errorf("no devices in grid")
+		return nil, fmt.Errorf("no devices in grid")
 	}
 	for pg.TotalConsumption() > pg.maxPower {
 		maxDevice := pg.findMaxPowerDevice()
 		if maxDevice == nil {
-			return fmt.Errorf("no device to turn off")
+			return nil, fmt.Errorf("no device to turn off")
 		}
 		maxDevice.TurnOff()
+		return maxDevice, nil
 	}
-	return nil
+	return nil, nil
 }
 
 func (pg *PowerGrid) findMaxPowerDevice() *device.Device {
-	var maxDevice *device.Device
+	var MaxDevice *device.Device
 	for _, d := range pg.devices {
-		if d.IsOn() && (maxDevice == nil || d.Power() > maxDevice.Power()) {
-			maxDevice = d
+		if d.IsOn() && (MaxDevice == nil || d.Power() > MaxDevice.Power()) {
+			MaxDevice = d
 		}
 	}
-	return maxDevice
+	return MaxDevice
 
+}
+func (pg *PowerGrid) MaxPower() int {
+	return pg.maxPower
 }
