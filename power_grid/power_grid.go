@@ -2,7 +2,6 @@ package power_grid
 
 import (
 	"fmt"
-	"runtime"
 	"smart_go/device"
 )
 
@@ -33,20 +32,27 @@ func (pg *PowerGrid) TotalConsumption() int {
 	}
 	return total
 }
-func (pg *PowerGrid) AutoDisable() {
+func (pg *PowerGrid) AutoDisable() error {
+	if len(pg.devices) == 0 {
+		return fmt.Errorf("no devices in grid")
+	}
+	for pg.TotalConsumption() > pg.maxPower {
+		maxDevice := pg.findMaxPowerDevice()
+		if maxDevice == nil {
+			return fmt.Errorf("no device to turn off")
+		}
+		maxDevice.TurnOff()
+	}
+	return nil
+}
+
+func (pg *PowerGrid) findMaxPowerDevice() *device.Device {
 	var maxDevice *device.Device
 	for _, d := range pg.devices {
-		if maxDevice == nil || d.Power() > maxDevice.Power() {
-			if d.IsOn() {
-				maxDevice = d
-			}
+		if d.IsOn() && (maxDevice == nil || d.Power() > maxDevice.Power()) {
+			maxDevice = d
 		}
 	}
-	if maxDevice == nil {
-		runtime.Breakpoint()
-	}
-	maxDevice.TurnOff()
-	fmt.Printf("=================================\n "+
-		"Power grid is overloaded! \n Device %s is off\n================================= \n", maxDevice.Name())
-	fmt.Printf("Actual total consumer of grid is : %d \n", pg.TotalConsumption())
+	return maxDevice
+
 }
