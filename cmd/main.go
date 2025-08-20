@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	grid := power_grid.NewPowerGrid(3500)
+	grid := power_grid.NewPowerGrid(1500)
 	kettle := device.NewDevice("Kettle", 1500)
 	ac1 := device.NewDevice("AC1", 1000)
 	ac2 := device.NewDevice("AC2", 1500)
@@ -44,9 +44,9 @@ func main() {
 	}
 	grid.AddDevice(unsafeKettle)
 
-	fmt.Printf("Total consumption: %d \n", grid.TotalConsumption())
+	fmt.Printf("Total consumption: %d \nMaximal power is: %d\n", grid.TotalConsumption(), grid.MaxPower())
 	for grid.TotalConsumption() > grid.MaxPower() {
 		disabledDevice, _ := grid.AutoDisable()
-		fmt.Printf("===============\nPower grid is overloaded!\n Device %s off\n===============", disabledDevice.Name())
+		fmt.Printf("===============\nPower grid is overloaded!\n Device %s off\n===============\n", disabledDevice.Name())
 	}
 }

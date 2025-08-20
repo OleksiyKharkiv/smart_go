@@ -19,7 +19,9 @@ func NewPowerGrid(maxPower int) *PowerGrid {
 
 func (pg *PowerGrid) AddDevice(d *device.Device) {
 	pg.devices = append(pg.devices, d)
-	fmt.Printf("Device %s succefuly added \n", d.Name())
+	if d.IsOn() && d.IsSafe() {
+		fmt.Printf("Device %s succefuly added \n", d.Name())
+	}
 }
 
 func (pg *PowerGrid) TotalConsumption() int {
