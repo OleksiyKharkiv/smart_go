@@ -16,7 +16,6 @@ type Device struct {
 	status Status
 }
 
-// Конструктор
 func NewDevice(name string, power int) *Device {
 	return &Device{
 		name:   name,
@@ -26,7 +25,6 @@ func NewDevice(name string, power int) *Device {
 	}
 }
 
-// Методы управления состоянием
 func (d *Device) TurnOn() error {
 	if !d.isSafe {
 		return fmt.Errorf("device %s is not safe!", d.name)
@@ -43,7 +41,6 @@ func (d *Device) SetSafeStatus(isSafe bool) {
 	d.isSafe = isSafe
 }
 
-// Геттеры (инкапсуляция)
 func (d *Device) Name() string {
 	return d.name
 }
@@ -60,7 +57,7 @@ func (d *Device) IsOn() bool {
 	return d.status == StatusOn
 }
 
-// String реализует интерфейс Stringer
+// String interface Stringer
 func (d *Device) String() string {
 	return fmt.Sprintf("device %s is %s and %s, power: %dW",
 		d.name,
@@ -69,7 +66,6 @@ func (d *Device) String() string {
 		d.power)
 }
 
-// Вспомогательный метод для безопасности
 func (d *Device) safetyString() string {
 	if d.isSafe {
 		return "safe"
