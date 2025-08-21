@@ -21,7 +21,7 @@ func NewDevice(name string, power int) *Device {
 		name:   name,
 		power:  power,
 		status: StatusOff,
-		isSafe: true, // По умолчанию устройство безопасно
+		isSafe: true,
 	}
 }
 
